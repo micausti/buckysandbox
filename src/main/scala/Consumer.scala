@@ -36,7 +36,6 @@ object Consumer extends IOApp {
       IO(Ack)
   }
 
-
   override def run(args: List[String]): IO[ExitCode] = {
     implicit val ec: ExecutionContext = ExecutionContext.global
     (for {

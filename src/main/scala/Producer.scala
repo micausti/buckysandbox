@@ -9,6 +9,7 @@ import com.itv.bucky._
 import com.itv.bucky.circe._
 import com.itv.bucky.consume._
 import com.itv.bucky.publish._
+import publish
 
 object MyApp extends IOApp {
   case class Message(foo: String)
@@ -23,7 +24,7 @@ object MyApp extends IOApp {
     implicit val ec: ExecutionContext = ExecutionContext.global
     (for {
       client <- AmqpClient[IO](config)
-      _ <- client.declare(declarations)
+      _ <- Resource.pure(client.declare(declarations))
     } yield client).use {client =>
       val publisher = client.publisherOf[Message](ExchangeName("test-exchange"), RoutingKey("test-routing-key"))  // <- publisher being created
       publisher(Message("Hello")) //message is sent
