@@ -1,0 +1,14 @@
+version: '3'
+services:
+
+  rabbit-for-dpa-manager:
+    image: rabbitmq:3.6.10-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    hostname: "rabbit-for-shift"
+    environment:
+      RABBITMQ_DEFAULT_USER: "shift"
+      RABBITMQ_DEFAULT_PASS: "shift"
+
+
